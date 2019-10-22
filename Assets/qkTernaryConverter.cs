@@ -187,7 +187,7 @@ public void convert(int number)
 			Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, submitButton.transform);
 			if(!solved){
 			if(inputstring==finalAnswer){
-				Debug.LogFormat("[Tenary Converter #{0}] Correct answer entered! Module solved!", moduleId);
+				Debug.LogFormat("[Ternary Converter #{0}] Correct answer entered! Module solved!", moduleId);
 				solved=true;
 				decimalDisplay.GetComponent<TextMesh>().text=numberToMake.ToString();
 				resizeText(decimalDisplay);
