@@ -198,6 +198,7 @@ public void convert(int number)
 				else{Debug.LogFormat("[Ternary Converter #{0}] Incorrect answer entered: {1}! Strike!", moduleId, inputstring);}
 				inputstring="";
 				inputDisplay.GetComponent<TextMesh>().text="";
+				inputDisplay.GetComponent<TextMesh>().fontSize=120;
 				GetComponent<KMBombModule>().HandleStrike();
 			}}
 			return false;
