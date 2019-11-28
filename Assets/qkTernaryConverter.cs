@@ -27,79 +27,79 @@ public class qkTernaryConverter : MonoBehaviour {
 	int moduleId;
 
 
-	public int[] arr = new int[33];
+	public int []arr = new int[33]; 
+  
+	public void balTernary(int ter) 
+	{ 
+    	int carry = 0, b = 10; 
+    	int i = 32; 
+    	while (ter > 0)  
+    	{ 
+        int rem = ter % b; 
+        rem = rem + carry; 
+        if (rem == 0)  
+        { 
+            arr[i--] = 0; 
+            carry = 0; 
+        } 
+        else if (rem == 1)  
+        { 
+            arr[i--] = 1; 
+            carry = 0; 
+        } 
+        else if (rem == 2) 
+        { 
+            arr[i--] = -1; 
+            carry = 1; 
+        } 
+        else if (rem == 3)  
+        { 
+            arr[i--] = 0; 
+            carry = 1; 
+        } 
+        ter = (int)(ter / b); 
+    } 
+    if (carry == 1) 
+        arr[i] = 1; 
+} 
+  
 
-	public void balTernary(int ter)
-	{
-    	int carry = 0, b = 10;
-    	int i = 32;
-    	while (ter > 0)
-    	{
-        int rem = ter % b;
-        rem = rem + carry;
-        if (rem == 0)
-        {
-            arr[i--] = 0;
-            carry = 0;
-        }
-        else if (rem == 1)
-        {
-            arr[i--] = 1;
-            carry = 0;
-        }
-        else if (rem == 2)
-        {
-            arr[i--] = -1;
-            carry = 1;
-        }
-        else if (rem == 3)
-        {
-            arr[i--] = 0;
-            carry = 1;
-        }
-        ter = (int)(ter / b);
-    }
-    if (carry == 1)
-        arr[i] = 1;
-}
+static int ternary(int number) 
+{ 
+    int ans = 0, rem = 1, b = 1; 
+    while (number > 0)  
+    { 
+        rem = number % 3; 
+        ans = ans + rem * b; 
+        number = (int)(number / 3); 
+        b = b * 10; 
+    } 
+    return ans; 
+} 
+  
 
-
-static int ternary(int number)
-{
-    int ans = 0, rem = 1, b = 1;
-    while (number > 0)
-    {
-        rem = number % 3;
-        ans = ans + rem * b;
-        number = (int)(number / 3);
-        b = b * 10;
-    }
-    return ans;
-}
-
-
-public void convert(int number)
-{
+public void convert(int number) 
+{ 
 
 	//Code made by Rajput-Ji modified by Qkrisi
 	//Original code: https://www.geeksforgeeks.org/game-theory-in-balanced-ternary-numeral-system-moving-3k-steps-at-a-time/
-
-    int ter = ternary(number);
+  
+    int ter = ternary(number); 
 	base3=ter.ToString();
-    balTernary(ter);
+    balTernary(ter); 
 
-    int i = 0;
-
-
-    while (arr[i] == 0)
-    {
-        i++;
-    }
-
-    for (int j = i; j <= 32; j++)
-    {
-
-
+    int i = 0; 
+  
+    
+    while (arr[i] == 0)  
+    { 
+        i++; 
+    } 
+  
+    for (int j = i; j <= 32; j++)  
+    { 
+  
+        
         if (arr[j] == -1) {
             balancedTernary=balancedTernary+"-";}
         else{
@@ -107,10 +107,10 @@ public void convert(int number)
             	balancedTernary=balancedTernary+"+";}
 				else{
         			balancedTernary=balancedTernary+arr[j].ToString();}
-    }
+    } 
 }}
-
-
+ 
+  
 
 	void resizeText(GameObject disp){
 		int pluschars = 0;
@@ -125,13 +125,13 @@ public void convert(int number)
 		}
 		return;
 	}
+	
 
-
-
+	
 	void Start () {
 		moduleId=moduleIdCounter++;
-        numberToMake=rdn.Range(0,10000);
-        state =rdn.Range(0,2);
+		numberToMake=rdn.Range(0,10000);
+		state=rdn.Range(0,2);
 		if(state==1){
 			needBalance=true;
 		}
