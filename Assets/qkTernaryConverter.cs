@@ -246,6 +246,7 @@ public void convert(int number)
 					yield break;
 					break;
 			}
+            yield return new WaitForSeconds(.25f);
 		}
 		yield return null;
 		submitButton.OnInteract();
