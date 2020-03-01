@@ -81,7 +81,7 @@ static int ternary(int number)
 public void convert(int number) 
 { 
 
-	//Code made by Rajput-Ji modified by Qkrisi
+	//Code made by Rajput-Ji, modified by Qkrisi
 	//Original code: https://www.geeksforgeeks.org/game-theory-in-balanced-ternary-numeral-system-moving-3k-steps-at-a-time/
   
     int ter = ternary(number); 
@@ -152,6 +152,7 @@ public void convert(int number)
 			Display.GetComponent<TextMesh>().text=balancedTernary;
 			finalAnswer=base3;
 		}
+		finalAnswer = new string(finalAnswer.SkipWhile(c => c=='0').ToArray());
 		resizeText(Display);
 		numberedButtons[0].OnInteract += delegate(){
 			pressButton("0");
@@ -186,21 +187,23 @@ public void convert(int number)
 			submitButton.AddInteractionPunch(.5f);
 			Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, submitButton.transform);
 			if(!solved){
-			if(inputstring==finalAnswer){
-				Debug.LogFormat("[Ternary Converter #{0}] Correct answer entered! Module solved!", moduleId);
-				solved=true;
-				decimalDisplay.GetComponent<TextMesh>().text=numberToMake.ToString();
-				resizeText(decimalDisplay);
-				GetComponent<KMBombModule>().HandlePass();
+				inputstring = new string(inputstring.SkipWhile(c => c=='0').ToArray());
+				if(inputstring==finalAnswer){
+					Debug.LogFormat("[Ternary Converter #{0}] Correct answer entered! Module solved!", moduleId);
+					solved=true;
+					decimalDisplay.GetComponent<TextMesh>().text=numberToMake.ToString();
+					resizeText(decimalDisplay);
+					GetComponent<KMBombModule>().HandlePass();
+				}
+				else{
+					if(inputstring==""){Debug.LogFormat("[Ternary Converter #{0}] Incorrect answer entered: *Literally nothing*! Strike!", moduleId);}
+					else{Debug.LogFormat("[Ternary Converter #{0}] Incorrect answer entered: {1}! Strike!", moduleId, inputstring);}
+					inputstring="";
+					inputDisplay.GetComponent<TextMesh>().text="";
+					inputDisplay.GetComponent<TextMesh>().fontSize=120;
+					GetComponent<KMBombModule>().HandleStrike();
+				}
 			}
-			else{
-				if(inputstring==""){Debug.LogFormat("[Ternary Converter #{0}] Incorrect answer entered: *Literally nothing*! Strike!", moduleId);}
-				else{Debug.LogFormat("[Ternary Converter #{0}] Incorrect answer entered: {1}! Strike!", moduleId, inputstring);}
-				inputstring="";
-				inputDisplay.GetComponent<TextMesh>().text="";
-				inputDisplay.GetComponent<TextMesh>().fontSize=120;
-				GetComponent<KMBombModule>().HandleStrike();
-			}}
 			return false;
 		};
 	}
